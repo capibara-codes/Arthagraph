@@ -11,9 +11,18 @@ password = os.getenv("NEO4J_PASSWORD")
 driver = GraphDatabase.driver(uri, auth=(user, password))
 
 def create_nodes():
-    # Load our data
-    df_ancient = pd.read_csv('data/ancient_sites.csv')
-    df_modern = pd.read_csv('data/modern_hubs.csv')
+   def create_nodes():
+    # Get the directory where the script is located
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Go up one level to the main Arthagraph folder and find the data CSVs
+    ancient_path = os.path.join(base_dir, '..', 'data', 'ancient_sites.csv')
+    modern_path = os.path.join(base_dir, '..', 'data', 'modern_hubs.csv')
+
+    # Load our data using the new paths
+    df_ancient = pd.read_csv(ancient_path)
+    df_modern = pd.read_csv(modern_path)
+    
 
     with driver.session() as session:
         # Clear existing data (Be careful with this in real jobs!)
