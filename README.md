@@ -22,7 +22,12 @@ The project follows a modular Data Pipeline architecture:
 3. **Loading:** Data is ingested into Neo4j as Nodes (Entities) and Edges (Relationships).
 4. **Analytics:** Cypher queries identify "overlaps" where modern finance sits atop ancient trade hubs.
 
-
+## 📈 Roadmap & Progress
+- [x] **Phase 1:** Project Initialization & Schema Design
+- [x] **Phase 2:** Synthetic Data Generation (CSV)
+- [x] **Phase 3:** Neo4j Cloud Connection & Environment Security
+- [x] **Phase 4:** Knowledge Graph Construction & Ingestion
+- [ ] **Phase 5:** Spatial Analytics & FinTech Insights
 
 ---
 
