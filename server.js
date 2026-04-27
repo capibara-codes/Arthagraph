@@ -1,24 +1,31 @@
 const express = require('express');
-const neo4j = require('neo4j-driver');
-require('dotenv').config({ path: '../.env' });
+const cors = require('cors');
+const path = require('path');
 
 const app = express();
-const driver = neo4j.driver(process.env.NEO4J_URI, neo4j.auth.basic(process.env.NEO4J_USERNAME, process.env.NEO4J_PASSWORD));
+const PORT = process.env.PORT || 3000;
 
-app.use(express.static('public')); // This serves your HTML/CSS
+app.use(cors());
+app.use(express.static('public'));
 
-app.get('/api/data', async (req, res) => {
-    const session = driver.session();
-    try {
-        const result = await session.run('MATCH (m:ModernHub)-[r]->(a:AncientSite) RETURN m.name as modern, a.name as ancient');
-        const data = result.records.map(record => ({
-            modern: record.get('modern'),
-            ancient: record.get('ancient')
-        }));
-        res.json(data);
-    } finally {
-        await session.close();
-    }
+// Sample data - replace with your actual IKS graph data
+const graphData = [
+    { modern: "Digital Wallet", ancient: "Kashika (Shell Money)" },
+    { modern: "Cryptocurrency", ancient: "Cowrie Shells" },
+    { modern: "Smart Contracts", ancient: "Maqasid al-Aqad" },
+    { modern: "Peer-to-Peer Transfer", ancient: "Hundi System" },
+    { modern: "Blockchain Ledger", ancient: "Tamras (Trade Records)" },
+    { modern: "DeFi Protocols", ancient: "Joint Liability Partnerships" }
+];
+
+app.get('/api/data', (req, res) => {
+    res.json(graphData);
 });
 
-app.listen(3000, () => console.log('🚀 ArthaGraph running on http://localhost:3000'));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.listen(PORT, () => {
+    console.log(`🏛️ ArthaGraph server running at http://localhost:${PORT}`);
+});
