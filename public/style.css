@@ -1,0 +1,36 @@
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: #0f172a; /* Dark Navy */
+    color: #f8fafc;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    max-width: 800px;
+    margin-top: 50px;
+}
+
+h1 {
+    color: #38bdf8; /* Sky Blue */
+    font-size: 2.5rem;
+}
+
+.card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 12px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    border-color: #38bdf8;
+}
+
+.ancient { color: #fbbf24; font-weight: bold; } /* Gold */
+.modern { color: #38bdf8; font-weight: bold; }  /* Blue */

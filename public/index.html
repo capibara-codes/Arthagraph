@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>ArthaGraph | IKS Explorer</title>
+</head>
+<body>
+    <div class="container">
+        <h1>🏛️ ArthaGraph</h1>
+        <p>Connecting Ancient Trade to Modern FinTech</p>
+        <div id="results">Loading graph data...</div>
+    </div>
+
+    <script>
+        async function fetchData() {
+            const response = await fetch('/api/data');
+            const data = await response.json();
+            const div = document.getElementById('results');
+            div.innerHTML = '';
+            
+            data.forEach(item => {
+                div.innerHTML += `
+                    <div class="card">
+                        <span class="modern">${item.modern}</span> 
+                        <br>Evolved from <br>
+                        <span class="ancient">${item.ancient}</span>
+                    </div>`;
+            });
+        }
+        fetchData();
+    </script>
+</body>
+</html>
